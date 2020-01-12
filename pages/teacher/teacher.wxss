@@ -1,0 +1,58 @@
+.teacher-list {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  /* overflow: scroll; */
+  background-color: white;
+  color: black;
+  width: 25%;
+}
+.teacher-list-item {
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 110%;
+}
+
+.course-list {
+  position: absolute;
+  left: 25%;
+  width: 75%;
+}
+.course-list-item {
+  box-shadow: rgba(0, 0, 0, 0.2) 0 1px 5px 0;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 95%;
+  margin: 0 0 10px 0;
+  padding: 10px 0 10px 0;
+}
+.course-title {
+  font-size: 105%;
+  font-weight: bold;
+}
+.score {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: rgb(106, 106, 106);
+}
+.score-item {
+  width: 85%;
+  display: flex;
+  flex-direction: row;
+}
+.score-section {
+  width: 90%;
+}
+.average {
+  margin: 2px 0 2px 0;
+  font-size: 105%;
+}
+.reference {
+  color: rgb(189, 189, 189);
+}

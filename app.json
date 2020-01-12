@@ -1,21 +1,37 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/me/me"
+    "pages/me/me",
+    "pages/teacher/teacher"
   ],
   "window": {
-    "navigationStyle": "custom"
+    "navigationBarBackgroundColor": "#F8BBD0",
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "中南大外院给分查询"
   },
   "tabBar": {
     "list": [
       {
         "pagePath": "pages/index/index",
-        "text": "首页"
+        "text": "首页",
+        "iconPath": "assets/icon/index_default.png",
+        "selectedIconPath": "assets/icon/index_selected.png"
+      },
+      {
+        "pagePath": "pages/teacher/teacher",
+        "text": "老师",
+        "iconPath": "assets/icon/teacher_default.png",
+        "selectedIconPath": "assets/icon/teacher_selected.png"
       },
       {
         "pagePath": "pages/me/me",
-        "text": "我的"
+        "text": "我的",
+        "iconPath": "assets/icon/me_default.png",
+        "selectedIconPath": "assets/icon/me_selected.png"
       }
-    ]
-  }
+    ],
+    "color": "#515151",
+    "selectedColor": "#F8BBD0"
+  },
+  "sitemapLocation": "sitemap.json"
 }

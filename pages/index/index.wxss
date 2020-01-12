@@ -1,0 +1,64 @@
+.input-bar {
+  background-color: rgb(248, 187, 208);
+  padding: 0 0 15px 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: fixed;
+  width: 100%;
+  height: 50px;
+  color: white;
+  z-index: 3;
+}
+.input-bar input {
+  background-color: white;
+  border-radius: 10px;
+  width: 80%;
+  height: 35px;
+  margin: 0 5% 0 0;
+  padding: 0 1%;
+  color: #515151;
+}
+.course-list {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+.course-list-item {
+  box-shadow: rgba(0, 0, 0, 0.2) 0 1px 5px 0;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 95%;
+  margin: 0 0 10px 0;
+  padding: 10px 0 10px 0;
+}
+.course-title {
+  font-size: 105%;
+  font-weight: bold;
+}
+.score {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: rgb(106, 106, 106);
+}
+.score-item {
+  width: 85%;
+  display: flex;
+  flex-direction: row;
+}
+.score-section {
+  width: 90%;
+}
+.average {
+  margin: 2px 0 2px 0;
+  font-size: 105%;
+}
+.reference {
+  color: rgb(189, 189, 189);
+}

@@ -1,0 +1,39 @@
+<view class="content">
+  <view class="teacher-list" style="top:{{statusBarHeight}}px">
+    <view class="teacher-list-item" wx:for="{{teacherList}}" bindtap="clickTeacher" data-name="{{item.teacher_name}}">
+      <text>{{item.teacher_name}}</text>
+    </view>
+  </view>
+  <view class="course-list" style="top:{{statusBarHeight}}px">
+    <view class="course-list-item" wx:for="{{courseList}}" wx:key="{{item.course_id}}">
+      <text class="course-title">{{item.course_name}} - {{item.teacher_name}}</text>
+      <view class="score">
+        <view class="score-item">
+          <text class="score-section">挂科</text>
+          <text>{{item.percentage["0"]}}%</text>
+        </view>
+        <view class="score-item">
+          <text class="score-section">60-69</text>
+          <text>{{item.percentage["1"]}}%</text>
+        </view>
+        <view class="score-item">
+          <text class="score-section">70-79</text>
+          <text>{{item.percentage["2"]}}%</text>
+        </view>
+        <view class="score-item">
+          <text class="score-section">80-89</text>
+          <text>{{item.percentage["3"]}}%</text>
+        </view>
+        <view class="score-item">
+          <text class="score-section">90-100</text>
+          <text>{{item.percentage["4"]}}%</text>
+        </view>
+      </view>
+      <view class="score-item average">
+        <text class="score-section">均分</text>
+        <text>{{item.average}}</text>
+      </view>
+      <text class="reference">给分参考人数：{{item.people_count}}人</text>
+    </view>
+  </view>
+</view>
