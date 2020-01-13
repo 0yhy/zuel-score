@@ -3,7 +3,7 @@
   <text>搜索</text>
 </view>
 <view class="course-list" style="top:{{statusBarHeight + 50}}px">
-  <view class="course-list-item" wx:for="{{courseList}}" wx:key="{{item.course_id}}">
+  <view class="course-list-item" wx:for="{{courseList}}" wx:key="{{item.course_id}}" bindtap="clickCourse" data-teacher="{{item.teacher_name}}" data-course="{{item.course_name}}">
     <text class="course-title">{{item.course_name}} - {{item.teacher_name}}</text>
     <view class="score">
       <view class="score-item">

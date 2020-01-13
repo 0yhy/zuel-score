@@ -25,5 +25,10 @@ Page({
         console.log(this.data.url + "/course")
       },
     });
+  },
+  clickCourse: function (e) {
+    wx.navigateTo({
+      url: `../../pages/course/course?teacher=${e.currentTarget.dataset.teacher}&course=${e.currentTarget.dataset.course}`
+    });
   }
 })

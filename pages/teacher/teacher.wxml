@@ -1,11 +1,11 @@
 <view class="content">
-  <view class="teacher-list" style="top:{{statusBarHeight}}px">
-    <view class="teacher-list-item" wx:for="{{teacherList}}" bindtap="clickTeacher" data-name="{{item.teacher_name}}">
+  <view class="teacher-list">
+    <view class="teacher-list-item bubble {{current == item.teacher_name ? 'current' : ''}}" wx:for="{{teacherList}}" bindtap="clickTeacher" data-name="{{item.teacher_name}}">
       <text>{{item.teacher_name}}</text>
     </view>
   </view>
-  <view class="course-list" style="top:{{statusBarHeight}}px">
-    <view class="course-list-item" wx:for="{{courseList}}" wx:key="{{item.course_id}}">
+  <view class="course-list">
+    <view class="course-list-item" wx:for="{{courseList}}" wx:key="{{item.course_id}}" bindtap="clickCourse" data-teacher="{{item.teacher_name}}" data-course="{{item.course_name}}">
       <text class="course-title">{{item.course_name}} - {{item.teacher_name}}</text>
       <view class="score">
         <view class="score-item">

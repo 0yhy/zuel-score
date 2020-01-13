@@ -60,6 +60,14 @@
 					"id": -1,
 					"name": "teacher",
 					"pathName": "pages/teacher/teacher",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 1,
+					"name": "course",
+					"pathName": "pages/course/course",
+					"query": "teacher=周娟&course=批判性思维阅读（3）",
 					"scene": null
 				}
 			]

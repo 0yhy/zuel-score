@@ -1,5 +1,5 @@
 .input-bar {
-  background-color: rgb(248, 187, 208);
+  background-color: #F9B8BE;
   padding: 0 0 15px 10px;
   display: flex;
   flex-direction: row;

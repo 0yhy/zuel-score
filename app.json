@@ -2,10 +2,11 @@
   "pages": [
     "pages/index/index",
     "pages/me/me",
-    "pages/teacher/teacher"
+    "pages/teacher/teacher",
+    "pages/course/course"
   ],
   "window": {
-    "navigationBarBackgroundColor": "#F8BBD0",
+    "navigationBarBackgroundColor": "#F9B8BE",
     "navigationBarTextStyle": "white",
     "navigationBarTitleText": "中南大外院给分查询"
   },

@@ -1,0 +1,76 @@
+.icon {
+  width: 20px;
+  height: 20px;
+  margin: 0 15px 0 0;
+}
+.content {
+  padding: 20px;
+}
+.course-introduction {
+  display: flex;
+  flex-direction: column;
+}
+.course-name {
+  font-size: 120%;
+  font-weight: bolder;
+}
+.teacher-avg-people {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 20px 0 0 0;
+  color: rgb(112, 112, 112);
+}
+.teacher-avg-people-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 3px 0;
+}
+
+.card {
+  box-shadow: rgba(0, 0, 0, 0.2) 0 1px 5px 0;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 30px 0 10px 0;
+  padding: 10px 0 10px 0;
+  z-index: 1027;
+}
+.title {
+  font-size: 115%;
+}
+.score {
+  font-size: 500%;
+  font-family: 'Courier New', Courier, monospace;
+}
+.comment {
+  display: flex;
+  flex-direction: row;
+}
+.comment-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 30px 40px 30px 40px;
+}
+.like-icon {
+  height: 25px;
+  width: 30px;
+  margin: 10px 0 0 0;
+}
+
+.zuel {
+  width: 100%;
+  height: 25%;
+  position: absolute;
+  bottom: 0;
+}
+
+picker-view {
+  height: 200px;
+}
+picker-view-column view {
+  line-height: 50px;
+}

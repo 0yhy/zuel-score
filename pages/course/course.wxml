@@ -1,0 +1,47 @@
+<view class="content">
+  <view class="course-introduction">
+    <text class="course-name">{{course.course_name}}</text>
+    <view class="teacher-avg-people">
+      <view class="teacher teacher-avg-people-item">
+        <image src="../../assets/icon/teacher.png" class="icon" />
+        <text>授课老师：{{course.teacher_name}}</text>
+      </view>
+      <view class="avg teacher-avg-people-item">
+        <image src="../../assets/icon/avg.png" class="icon" />
+        <text>平均分数：{{course.average}}</text>
+      </view>
+      <view class="people teacher-avg-people-item">
+        <image src="../../assets/icon/people.png" class="icon" />
+        <text>参考人数：{{course.people_count}}人</text>
+      </view>
+    </view>
+  </view>
+  <view class="my-score card">
+    <text class="title">我的分数</text>
+    <text class="score">{{score0}}{{score1}}</text>
+  </view>
+  <view class="my-comment card">
+    <text class="title">我的评价</text>
+    <view class="comment">
+      <view class="comment-item">
+        <text>0</text>
+        <image class="like-icon" src="../../assets/icon/like_empty.png" />
+      </view>
+      <view class="comment-item">
+        <text>0</text>
+        <image class="like-icon" src="../../assets/icon/dislike.png" />
+      </view>
+    </view>
+  </view>
+  <picker>
+    <picker-view bindchange="changePicker" indicator-style="height: 50px" value="{{value}}">
+      <picker-view-column>
+        <view wx:for="{{score}}">{{item}}</view>
+      </picker-view-column>
+      <picker-view-column>
+        <view wx:for="{{score}}">{{item}}</view>
+      </picker-view-column>
+    </picker-view>
+  </picker>
+</view>
+<!-- <image class="zuel" src="../../assets/zuel.jpg" /> -->

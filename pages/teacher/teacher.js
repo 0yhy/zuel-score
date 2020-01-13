@@ -27,13 +27,12 @@ Page({
       responseType: 'text',
       success: (result) => {
         this.setData({ courseList: result.data.data });
-      },
-      fail: () => { },
-      complete: () => { }
+      }
     });
   },
   clickTeacher: function (e) {
     let teacher_name = e.currentTarget.dataset.name;
+    this.setData({ current: teacher_name });
     wx.request({
       url: this.data.url + "/teacher/course",
       data: { teacher_name: teacher_name },
@@ -43,9 +42,12 @@ Page({
       responseType: 'text',
       success: (result) => {
         this.setData({ courseList: result.data.data });
-      },
-      fail: () => { },
-      complete: () => { }
+      }
+    });
+  },
+  clickCourse: function (e) {
+    wx.navigateTo({
+      url: `../../pages/course/course?teacher=${e.currentTarget.dataset.teacher}&course=${e.currentTarget.dataset.course}`
     });
   }
 })
