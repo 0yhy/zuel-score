@@ -1,9 +1,6 @@
 let app = getApp();
 
-// let courses = require("../../test/course").json.data;
-
 const initialData = {
-  // courseList: courses,
   statusBarHeight: app.globalData.statusBarHeight,
   url: app.globalData.url
 };

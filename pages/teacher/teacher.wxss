@@ -50,10 +50,11 @@
   width: 75%;
   height: 100%;
   overflow: scroll;
+  z-index: 1027;
 }
 .course-list-item {
   box-shadow: rgba(0, 0, 0, 0.2) 0 1px 5px 0;
-  border-radius: 10px;
+  /* border-radius: 10px; */
   display: flex;
   flex-direction: column;
   align-items: center;

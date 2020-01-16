@@ -18,7 +18,9 @@
   </view>
   <view class="my-score card">
     <text class="title">我的分数</text>
-    <text class="score">{{score0}}{{score1}}</text>
+    <picker mode="multiSelector" class="score" range="{{scoreArray}}" bindchange="changePicker" value="{{value}}">
+      {{score.first}}{{score.second}}
+    </picker>
   </view>
   <view class="my-comment card">
     <text class="title">我的评价</text>
@@ -33,15 +35,5 @@
       </view>
     </view>
   </view>
-  <picker>
-    <picker-view bindchange="changePicker" indicator-style="height: 50px" value="{{value}}">
-      <picker-view-column>
-        <view wx:for="{{score}}">{{item}}</view>
-      </picker-view-column>
-      <picker-view-column>
-        <view wx:for="{{score}}">{{item}}</view>
-      </picker-view-column>
-    </picker-view>
-  </picker>
 </view>
-<!-- <image class="zuel" src="../../assets/zuel.jpg" /> -->
+<image class="zuel" src="../../assets/zuel.jpg" />

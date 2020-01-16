@@ -10,13 +10,42 @@ App({
       }
     });
   },
-  onShow(options) {
-    console.log("后台进入前台");
+  checkLoginStatus: function () {
+    let token = wx.getStorageSync("token");;
+    if (token) {
+      wx.checkSession({
+        fail: () => {
+          // this.login();
+        }
+      });
+    }
+    else {
+      // this.login();
+    }
   },
-  onHide() {
-    console.log("前台进入后台");
-  },
-  onError(msg) {
-    console.log("Err: ", msg);
+  login: function () {
+    wx.login({
+      success: (res) => {
+        if (res.code) {
+          wx.request({
+            url: this.globalData.url + "/users/checkuser",
+            data: { code: res.code },
+            header: { 'content-type': 'application/json' },
+            method: 'POST',
+            dataType: 'json',
+            responseType: 'text',
+            success: (res) => {
+              console.log(res);
+              wx.setStorageSync({
+                key: "token",
+                data: res.data.data.token
+              });
+            }
+          });
+        }
+      },
+      fail: () => { },
+      complete: () => { }
+    });
   }
 })

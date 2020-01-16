@@ -1,16 +1,21 @@
 const app = getApp();
 
-const score = [];
+const scoreArray = [];
 
-for (let i = 0; i <= 9; ++i) {
-  score.push(i)
+for (let i = 0; i <= 1; ++i) {
+  scoreArray.push(new Array());
+  for (let j = 0; j <= 9; ++j) {
+    scoreArray[i].push(j);
+  }
 }
 
 const initialData = {
   url: app.globalData.url,
-  score: score,
-  score0: 0,
-  score1: 0,
+  scoreArray: scoreArray,
+  score: {
+    "first": 0,
+    "second": 0
+  },
   value: [8, 5]
 }
 
@@ -29,6 +34,10 @@ Page({
     });
   },
   changePicker: function (e) {
-    this.setData({ score0: e.detail.value[0], score1: e.detail.value[1] });
+    let newScore = {
+      "first": e.detail.value[0],
+      "second": e.detail.value[1]
+    }
+    this.setData({ score: newScore });
   }
-})
+});

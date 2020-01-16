@@ -69,6 +69,13 @@
 					"pathName": "pages/course/course",
 					"query": "teacher=周娟&course=批判性思维阅读（3）",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "me",
+					"pathName": "pages/me/me",
+					"query": "",
+					"scene": null
 				}
 			]
 		}
