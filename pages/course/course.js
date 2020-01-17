@@ -88,9 +88,6 @@ Page({
         header: {
           'content-type': 'application/json',
           "authorization": `Bearer ${this.data.token}`
-        },
-        success: (res) => {
-          console.log("like");
         }
       });
     }
@@ -105,9 +102,6 @@ Page({
         header: {
           'content-type': 'application/json',
           "authorization": `Bearer ${this.data.token}`
-        },
-        success: (res) => {
-          console.log("cancellike");
         }
       });
     }
@@ -122,9 +116,6 @@ Page({
         header: {
           'content-type': 'application/json',
           "authorization": `Bearer ${this.data.token}`
-        },
-        success: (res) => {
-          console.log("dislike");
         }
       });
     }
@@ -138,9 +129,6 @@ Page({
         header: {
           'content-type': 'application/json',
           "authorization": `Bearer ${this.data.token}`
-        },
-        success: (res) => {
-          console.log("canceldislike");
         }
       });
     }
