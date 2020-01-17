@@ -26,12 +26,12 @@
     <text class="title">我的评价</text>
     <view class="comment">
       <view class="comment-item">
-        <text>0</text>
-        <image class="like-icon" src="../../assets/icon/like_empty.png" />
+        <text>{{like_count}}</text>
+        <image class="like-icon" src="{{currentLiked?liked:like}}" bindtap="like" />
       </view>
       <view class="comment-item">
-        <text>0</text>
-        <image class="like-icon" src="../../assets/icon/dislike.png" />
+        <text>{{dislike_count}}</text>
+        <image class="like-icon" src="{{currentDisliked?disliked:dislike}}" bindtap="dislike" />
       </view>
     </view>
   </view>

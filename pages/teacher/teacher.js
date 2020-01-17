@@ -2,7 +2,8 @@ let app = getApp();
 
 const initialData = {
   statusBarHeight: app.globalData.statusBarHeight,
-  url: app.globalData.url
+  url: app.globalData.url,
+  token: wx.getStorageSync("token")
 }
 
 Page({
@@ -11,7 +12,10 @@ Page({
     console.log("teacherPage")
     wx.request({
       url: this.data.url + "/teacher",
-      header: { 'content-type': 'application/json' },
+      header: {
+        'content-type': 'application/json',
+        "authorization": `Bearer ${this.data.token}`
+      },
       method: 'GET',
       dataType: 'json',
       success: (result) => {
@@ -21,7 +25,10 @@ Page({
     wx.request({
       url: this.data.url + "/teacher/course",
       data: { teacher_name: "肖鹏" },
-      header: { 'content-type': 'application/json' },
+      header: {
+        'content-type': 'application/json',
+        "authorization": `Bearer ${this.data.token}`
+      },
       method: 'GET',
       dataType: 'json',
       responseType: 'text',
@@ -36,7 +43,10 @@ Page({
     wx.request({
       url: this.data.url + "/teacher/course",
       data: { teacher_name: teacher_name },
-      header: { 'content-type': 'application/json' },
+      header: {
+        'content-type': 'application/json',
+        "authorization": `Bearer ${this.data.token}`
+      },
       method: 'GET',
       dataType: 'json',
       responseType: 'text',

@@ -1,1 +1,10 @@
-<button bindtap="goLogin">login</button>
+<!-- <button bindtap="goLogin">login</button> -->
+<view class="userinfo-rotate"></view>
+<view class="userinfo">
+  <view class="userinfo-nickname">
+    <open-data type="userNickName" />
+  </view>
+  <view class="userinfo-avatar">
+    <open-data type="userAvatarUrl" />
+  </view>
+</view>

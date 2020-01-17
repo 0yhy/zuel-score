@@ -1,26 +1,30 @@
 App({
   globalData: {
-    url: "http://127.0.0.1:1027"
+    url: "http://127.0.0.1:1027",
+    token: null
   },
-  onLaunch(options) {
+  onLaunch() {
     console.log("初始化");
     wx.getSystemInfo({
       success: (result) => {
         this.globalData.statusBarHeight = result.statusBarHeight;
       }
     });
+    this.checkLoginStatus();
   },
   checkLoginStatus: function () {
     let token = wx.getStorageSync("token");;
     if (token) {
+      console.log("token:", token);
       wx.checkSession({
         fail: () => {
-          // this.login();
+          this.login();
         }
       });
     }
     else {
-      // this.login();
+      this.login();
+      console.log("login!");
     }
   },
   login: function () {
@@ -35,11 +39,7 @@ App({
             dataType: 'json',
             responseType: 'text',
             success: (res) => {
-              console.log(res);
-              wx.setStorageSync({
-                key: "token",
-                data: res.data.data.token
-              });
+              wx.setStorageSync("token", res.data.data);
             }
           });
         }

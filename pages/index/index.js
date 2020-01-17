@@ -7,10 +7,14 @@ const initialData = {
 
 Page({
   data: initialData,
-  onLoad: function (option) {
+  onLoad: function () {
+    let token = wx.getStorageSync("token");
     wx.request({
       url: this.data.url + "/course",
-      header: { 'content-type': 'application/json' },
+      header: {
+        'content-type': 'application/json',
+        "authorization": `Bearer ${token}`
+      },
       method: 'GET',
       dataType: 'json',
       success: (result) => {

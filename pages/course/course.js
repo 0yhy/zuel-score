@@ -1,7 +1,25 @@
 const app = getApp();
 
-const scoreArray = [];
+const initialData = {
+  url: app.globalData.url,
+  token: wx.getStorageSync("token"),
+  scoreArray: scoreArray,
+  score: {
+    "first": 0,
+    "second": 0
+  },
+  value: [8, 5],
+  like: "../../assets/icon/like_empty.png",
+  liked: "../../assets/icon/like.png",
+  dislike: "../../assets/icon/dislike_empty.png",
+  disliked: "../../assets/icon/dislike.png",
+  currentLiked: false,
+  currentDisliked: false,
+  like_count: 0,
+  dislike_count: 0
+}
 
+const scoreArray = [];
 for (let i = 0; i <= 1; ++i) {
   scoreArray.push(new Array());
   for (let j = 0; j <= 9; ++j) {
@@ -9,35 +27,150 @@ for (let i = 0; i <= 1; ++i) {
   }
 }
 
-const initialData = {
-  url: app.globalData.url,
-  scoreArray: scoreArray,
-  score: {
-    "first": 0,
-    "second": 0
-  },
-  value: [8, 5]
-}
-
 Page({
   data: initialData,
   onLoad: function (option) {
     wx.request({
-      url: this.data.url + `/course/detail?teacher_name=${option.teacher}&course_name=${option.course}`,
-      header: { 'content-type': 'application/json' },
-      method: 'GET',
-      dataType: 'json',
-      responseType: 'text',
+      url: `${this.data.url}/course/detail?teacher_name=${option.teacher}&course_name=${option.course}`,
+      header: {
+        'content-type': 'application/json',
+        "authorization": `Bearer ${this.data.token}`
+      },
       success: (result) => {
         this.setData({ course: result.data.data });
+        wx.request({
+          url: `${this.data.url}/course/like?course_id=${this.data.course._id}`,
+          header: {
+            'content-type': 'application/json',
+            "authorization": `Bearer ${this.data.token}`
+          },
+          success: (res) => {
+            this.setData({
+              currentLiked: res.data.data.islike,
+              like_count: res.data.data.like_count
+            });
+          }
+        });
+        wx.request({
+          url: `${this.data.url}/course/dislike?course_id=${this.data.course._id}`,
+          header: {
+            'content-type': 'application/json',
+            "authorization": `Bearer ${this.data.token}`
+          },
+          success: (res) => {
+            this.setData({
+              currentDisliked: res.data.data.isdislike,
+              dislike_count: res.data.data.dislike_count
+            });
+          }
+        });
       }
     });
   },
+  // 滚动选择分数
   changePicker: function (e) {
     let newScore = {
       "first": e.detail.value[0],
       "second": e.detail.value[1]
     }
     this.setData({ score: newScore });
+  },
+
+  setLikeData: function (likeordislike, trueorfalse) {
+    // 点赞
+    if (likeordislike && trueorfalse) {
+      this.setData({
+        currentLiked: true,
+        like_count: this.data.like_count + 1
+      });
+      wx.request({
+        url: `${this.data.url}/course/clicklike?course_id=${this.data.course._id}`,
+        header: {
+          'content-type': 'application/json',
+          "authorization": `Bearer ${this.data.token}`
+        },
+        success: (res) => {
+          console.log("like");
+        }
+      });
+    }
+    // 取消点赞
+    else if (likeordislike && !trueorfalse) {
+      this.setData({
+        currentLiked: false,
+        like_count: this.data.like_count - 1
+      });
+      wx.request({
+        url: `${this.data.url}/course/cancellike?course_id=${this.data.course._id}`,
+        header: {
+          'content-type': 'application/json',
+          "authorization": `Bearer ${this.data.token}`
+        },
+        success: (res) => {
+          console.log("cancellike");
+        }
+      });
+    }
+    // 不喜欢
+    else if (!likeordislike && trueorfalse) {
+      this.setData({
+        currentDisliked: true,
+        dislike_count: this.data.dislike_count + 1
+      });
+      wx.request({
+        url: `${this.data.url}/course/clickdislike?course_id=${this.data.course._id}`,
+        header: {
+          'content-type': 'application/json',
+          "authorization": `Bearer ${this.data.token}`
+        },
+        success: (res) => {
+          console.log("dislike");
+        }
+      });
+    }
+    else {
+      this.setData({
+        currentDisliked: false,
+        dislike_count: this.data.dislike_count - 1
+      });
+      wx.request({
+        url: `${this.data.url}/course/canceldislike?course_id=${this.data.course._id}`,
+        header: {
+          'content-type': 'application/json',
+          "authorization": `Bearer ${this.data.token}`
+        },
+        success: (res) => {
+          console.log("canceldislike");
+        }
+      });
+    }
+  },
+  // 点赞
+  like: function () {
+    const liked = this.data.currentLiked;
+    const disliked = this.data.currentDisliked;
+    if (!liked) {
+      this.setLikeData(true, true);
+      if (disliked) {
+        this.setLikeData(false, false);
+      }
+    }
+    else {
+      this.setLikeData(true, false);
+    }
+  },
+  // 踩
+  dislike: function () {
+    const liked = this.data.currentLiked;
+    const disliked = this.data.currentDisliked;
+    if (!disliked) {
+      this.setLikeData(false, true);
+      if (liked) {
+        this.setLikeData(true, false);
+      }
+    }
+    else {
+      this.setLikeData(false, false);
+    }
   }
 });
