@@ -1,5 +1,13 @@
 const app = getApp();
 
+const scoreArray = [];
+for (let i = 0; i <= 1; ++i) {
+  scoreArray.push(new Array());
+  for (let j = 0; j <= 9; ++j) {
+    scoreArray[i].push(j);
+  }
+}
+
 const initialData = {
   url: app.globalData.url,
   token: wx.getStorageSync("token"),
@@ -19,17 +27,10 @@ const initialData = {
   dislike_count: 0
 }
 
-const scoreArray = [];
-for (let i = 0; i <= 1; ++i) {
-  scoreArray.push(new Array());
-  for (let j = 0; j <= 9; ++j) {
-    scoreArray[i].push(j);
-  }
-}
-
 Page({
   data: initialData,
   onLoad: function (option) {
+    // 获取课程信息
     wx.request({
       url: `${this.data.url}/course/detail?teacher_name=${option.teacher}&course_name=${option.course}`,
       header: {
@@ -38,6 +39,8 @@ Page({
       },
       success: (result) => {
         this.setData({ course: result.data.data });
+
+        // 获取到course后再根据课程id拿到点赞情况
         wx.request({
           url: `${this.data.url}/course/like?course_id=${this.data.course._id}`,
           header: {
@@ -51,6 +54,7 @@ Page({
             });
           }
         });
+        // 根据课程id拿到踩情况
         wx.request({
           url: `${this.data.url}/course/dislike?course_id=${this.data.course._id}`,
           header: {
@@ -64,6 +68,22 @@ Page({
             });
           }
         });
+        // 根据课程id拿到分数情况
+        wx.request({
+          url: `${this.data.url}/course/score?course_id=${this.data.course._id}`,
+          header: {
+            'content-type': 'application/json',
+            "authorization": `Bearer ${this.data.token}`
+          },
+          success: (res) => {
+            this.setData({
+              score: {
+                first: res.data.data.score.first,
+                second: res.data.data.score.second
+              }
+            });
+          }
+        });
       }
     });
   },
@@ -72,8 +92,30 @@ Page({
     let newScore = {
       "first": e.detail.value[0],
       "second": e.detail.value[1]
-    }
+    };
     this.setData({ score: newScore });
+    // 发送打分请求
+    wx.request({
+      url: `${this.data.url}/score`,
+      data: {
+        course_id: this.data.course._id,
+        newscore_string: String(e.detail.value[0]) + String(e.detail.value[1])
+      },
+      header: {
+        'content-type': 'application/json', "authorization": `Bearer ${this.data.token}`
+      },
+      method: 'POST',
+      success: (res) => {
+        // 如果分数修改成功，重新请求课程详情，以修改页面上的平均分内容
+        wx.request({
+          url: `${this.data.url}/course/detail?teacher_name=${this.data.course.teacher_name}&course_name=${this.data.course.course_name}`,
+          header: { 'content-type': 'application/json', "authorization": `Bearer ${this.data.token}` },
+          success: (res) => {
+            this.setData({ course: res.data.data });
+          }
+        });
+      }
+    });
   },
 
   setLikeData: function (likeordislike, trueorfalse) {
