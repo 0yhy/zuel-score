@@ -3,7 +3,8 @@
     "pages/index/index",
     "pages/me/me",
     "pages/teacher/teacher",
-    "pages/course/course"
+    "pages/course/course",
+    "pages/advice/advice"
   ],
   "window": {
     "navigationBarBackgroundColor": "#F9B8BE",

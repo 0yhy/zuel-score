@@ -18,7 +18,7 @@
     <image class="icon" src="../../assets/icon/color.png" />
     <text>更换配色方案</text>
   </view>
-  <view class="functions-item functions-advice">
+  <view class="functions-item functions-advice" bindtap="goToAdvice">
     <image class="icon" src="../../assets/icon/advice.png" />
     <text>意见反馈</text>
   </view>

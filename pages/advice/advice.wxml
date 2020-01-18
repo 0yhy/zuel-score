@@ -1,0 +1,8 @@
+<view class="advice">
+  <image class="advice-avatar" src="../../assets/avatar.jpg" />
+  <image class="advice-note" src="../../assets/note.png" />
+  <view class="advice-submit" bindtap="submitAdvice">
+    <image class="advice-submit-icon" src="../../assets/icon/submit.png" />
+  </view>
+  <textarea type="text" class="advice-input" placeholder="制作不易，感谢您的宝贵意见~" bindinput="inputAdvice" />
+</view>

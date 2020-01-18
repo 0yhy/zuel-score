@@ -76,6 +76,12 @@
 					"pathName": "pages/me/me",
 					"query": "",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "advice",
+					"pathName": "pages/advice/advice",
+					"scene": null
 				}
 			]
 		}
