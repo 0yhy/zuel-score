@@ -1,7 +1,8 @@
 App({
   globalData: {
     url: "http://127.0.0.1:1027",
-    token: null
+    token: null,
+    isverified: false
   },
   onLaunch() {
     console.log("初始化");
@@ -46,4 +47,4 @@ App({
       }
     });
   }
-})
+});

@@ -1,10 +1,35 @@
 <!-- <button bindtap="goLogin">login</button> -->
 <view class="userinfo-rotate"></view>
 <view class="userinfo">
-  <view class="userinfo-nickname">
+  <view class="userinfo-nickname-and-verified">
     <open-data type="userNickName" />
+    <text class="userinfo-verified">{{isverified ? "" : "(身份未认证)"}}</text>
   </view>
   <view class="userinfo-avatar">
     <open-data type="userAvatarUrl" />
+  </view>
+</view>
+<view class="functions">
+  <view class="functions-item functions-verify">
+    <image class="icon" src="../../assets/icon/identity.png" />
+    <text>身份信息认证</text>
+  </view>
+  <view class="functions-item functions-verify">
+    <image class="icon" src="../../assets/icon/color.png" />
+    <text>更换配色方案</text>
+  </view>
+  <view class="functions-item functions-advice">
+    <image class="icon" src="../../assets/icon/advice.png" />
+    <text>意见反馈</text>
+  </view>
+  <view class="functions-item">
+    <image class="icon" src="../../assets/icon/score.png" />
+    <text>我的成绩</text>
+  </view>
+  <view class="myscore" wx:for="{{score}}">
+    <view class="myscore-item">
+      <text class="myscore-coursename">{{item.course_name}}</text>
+      <text class="myscore-score">{{item.score.first}}{{item.score.second}}</text>
+    </view>
   </view>
 </view>

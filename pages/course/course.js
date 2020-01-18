@@ -44,8 +44,7 @@ Page({
         wx.request({
           url: `${this.data.url}/course/like?course_id=${this.data.course._id}`,
           header: {
-            'content-type': 'application/json',
-            "authorization": `Bearer ${this.data.token}`
+            'content-type': 'application/json', "authorization": `Bearer ${this.data.token}`
           },
           success: (res) => {
             this.setData({
@@ -80,7 +79,8 @@ Page({
               score: {
                 first: res.data.data.score.first,
                 second: res.data.data.score.second
-              }
+              },
+              value: [Number(res.data.data.score.first), Number(res.data.data.score.second)]
             });
           }
         });
@@ -99,11 +99,10 @@ Page({
       url: `${this.data.url}/score`,
       data: {
         course_id: this.data.course._id,
-        newscore_string: String(e.detail.value[0]) + String(e.detail.value[1])
+        newscore_string: String(e.detail.value[0]) + String(e.detail.value[1]),
+        course_name: this.data.course.course_name
       },
-      header: {
-        'content-type': 'application/json', "authorization": `Bearer ${this.data.token}`
-      },
+      header: { 'content-type': 'application/json', "authorization": `Bearer ${this.data.token}` },
       method: 'POST',
       success: (res) => {
         // 如果分数修改成功，重新请求课程详情，以修改页面上的平均分内容
@@ -114,6 +113,9 @@ Page({
             this.setData({ course: res.data.data });
           }
         });
+        // const pages = getCurrentPages();
+        // const prePage = pages[pages.length - 2];
+        // prePage.onLoad();
       }
     });
   },
