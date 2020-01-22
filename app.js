@@ -14,11 +14,15 @@ App({
     this.checkLoginStatus();
   },
   checkLoginStatus: function () {
-    let token = wx.getStorageSync("token");;
+    let token = wx.getStorageSync("token");
     if (token) {
       console.log("token:", token);
       wx.checkSession({
+        success: () => {
+          console.log("session_key valid");
+        },
         fail: () => {
+          console.log("token expired!");
           this.login();
         }
       });

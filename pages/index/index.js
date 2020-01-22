@@ -14,7 +14,7 @@ Page({
       url: this.data.url + "/course",
       header: { 'content-type': 'application/json', "authorization": `Bearer ${this.data.token}` },
       success: (result) => {
-        console.log(result.data.data);
+        console.log(result.data);
         this.setData({ courseList: result.data.data });
       },
       fail: (err) => {

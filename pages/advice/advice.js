@@ -28,9 +28,11 @@ Page({
           duration: 1500,
           mask: false,
           success: () => {
-            wx.navigateBack({
-              delta: 1
-            });
+            setTimeout(() => {
+              wx.navigateBack({
+                delta: 1
+              });
+            }, 1500);
           }
         });
       }

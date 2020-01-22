@@ -81,6 +81,13 @@
 					"id": -1,
 					"name": "advice",
 					"pathName": "pages/advice/advice",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "identity",
+					"pathName": "pages/identity/identity",
 					"scene": null
 				}
 			]

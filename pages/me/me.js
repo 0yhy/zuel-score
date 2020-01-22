@@ -35,15 +35,24 @@ Page({
     });
   },
   goToAdvice: function () {
-    console.log("advice")
-    wx.navigateTo({
-      url: "../../pages/advice/advice",
+    console.log("advice");
+    wx.showLoading({
+      title: "Loading",
+      mask: true,
       success: () => {
-        console.log('hei')
-      },
-      fail: (err) => {
-        console.log(err)
+        wx.navigateTo({
+          url: "../../pages/advice/advice",
+          success: () => {
+            console.log('hei')
+          },
+          fail: (err) => {
+            console.log(err)
+          }
+        });
       }
     });
+    setTimeout(() => {
+      wx.hideLoading();
+    }, 2000);
   }
 })

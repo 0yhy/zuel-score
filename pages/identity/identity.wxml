@@ -1,0 +1,8 @@
+<view class="identity">
+  <image class="identity-img" src="../../assets/zuel-badge.png" />
+  <view class="identity-input">
+    <input class="input identity-username" type="number" bindinput="setUsernameData" placeholder="请输入学号" />
+    <input class="input identity-password" type="password" bindinput="setPasswordData" placeholder="请输入密码" />
+  </view>
+  <button class="identity-button button" bindtap="verifyIdentity">登录</button>
+</view>
