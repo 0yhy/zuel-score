@@ -1,6 +1,6 @@
 <view class="content">
   <view class="teacher-list">
-    <view class="teacher-list-item bubble {{current == item.teacher_name ? 'current' : ''}}" wx:for="{{teacherList}}" bindtap="clickTeacher" data-name="{{item.teacher_name}}">
+    <view class="teacher-list-item bubble {{curTeacher == item.teacher_name ? 'current' : ''}}" wx:for="{{teacherList}}" bindtap="clickTeacher" data-name="{{item.teacher_name}}">
       <text>{{item.teacher_name}}</text>
     </view>
   </view>

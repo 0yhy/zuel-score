@@ -3,7 +3,8 @@ let app = getApp();
 const initialData = {
   statusBarHeight: app.globalData.statusBarHeight,
   url: app.globalData.url,
-  token: wx.getStorageSync("token")
+  token: wx.getStorageSync("token"),
+  curTeacher: app.globalData.curTeacher
 }
 
 Page({
@@ -26,7 +27,7 @@ Page({
   onShow: function () {
     wx.request({
       url: this.data.url + "/teacher/course",
-      data: { teacher_name: "肖鹏" },
+      data: { teacher_name: app.globalData.curTeacher },
       header: {
         'content-type': 'application/json',
         "authorization": `Bearer ${this.data.token}`
@@ -36,19 +37,19 @@ Page({
       responseType: 'text',
       success: (result) => {
         this.setData({ courseList: result.data.data });
-        this.setData({ current: "肖鹏" });
       }
     });
   },
   clickTeacher: function (e) {
     let teacher_name = e.currentTarget.dataset.name;
-    this.setData({ current: teacher_name });
+    this.setData({ curTeacher: teacher_name });
     wx.request({
       url: this.data.url + "/teacher/course",
       data: { teacher_name: teacher_name },
       header: { 'content-type': 'application/json', "authorization": `Bearer ${this.data.token}` },
       success: (result) => {
         this.setData({ courseList: result.data.data });
+        app.globalData.curTeacher = teacher_name;
       }
     });
   },

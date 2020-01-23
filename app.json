@@ -5,7 +5,8 @@
     "pages/teacher/teacher",
     "pages/course/course",
     "pages/advice/advice",
-    "pages/identity/identity"
+    "pages/identity/identity",
+    "pages/userinfo/userinfo"
   ],
   "window": {
     "navigationBarBackgroundColor": "#F9B8BE",

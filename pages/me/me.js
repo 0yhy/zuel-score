@@ -9,24 +9,16 @@ const initialData = {
 Page({
   data: initialData,
   // goLogin: app.login,
-  onLoad: function () {
-    this.checkVerifyStatus();
-  },
   onShow: function () {
     this.getMyScore();
+    this.checkVerifyStatus();
   },
   checkVerifyStatus: function () {
-    wx.request({
-      url: `${this.data.url}/users/isverified`,
-      header: { 'content-type': 'application/json', "authorization": `Bearer ${this.data.token}` },
-      success: (res) => {
-        app.globalData.isverified = res.data.data;
-      }
-    });
+    this.setData({ isverified: app.globalData.isverified });
   },
   getMyScore: function () {
     wx.request({
-      url: `${this.data.url}/users/myscore`,
+      url: `${this.data.url}/users/getscore`,
       header: { 'content-type': 'application/json', "authorization": `Bearer ${this.data.token}` },
       success: (res) => {
         console.log(res.data.data);
@@ -54,5 +46,17 @@ Page({
     setTimeout(() => {
       wx.hideLoading();
     }, 2000);
+  },
+  goToIdentity: function () {
+    if (this.data.isverified) {
+      wx.navigateTo({
+        url: "../../pages/userinfo/userinfo"
+      });
+    }
+    else {
+      wx.navigateTo({
+        url: "../../pages/identity/identity"
+      });
+    }
   }
 })

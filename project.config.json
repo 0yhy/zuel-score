@@ -88,6 +88,13 @@
 					"id": -1,
 					"name": "identity",
 					"pathName": "pages/identity/identity",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "userinfo",
+					"pathName": "pages/userinfo/userinfo",
 					"scene": null
 				}
 			]

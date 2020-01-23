@@ -1,0 +1,14 @@
+<view class="userinfo">
+  <!-- <image class="userinfo-avatar-frame" src="../../assets/frame.png" /> -->
+  <image class="stick-tape" src="../../assets/stick-tape.png" />
+  <view class="card">
+    <view class="card-avatar-img">
+      <open-data type="userAvatarUrl" />
+    </view>
+    <view class="card-text">
+      <text>{{student_id}}</text>
+      <text>{{realname}}</text>
+    </view>
+  </view>
+</view>
+<image class="whale" src="../../assets/whale.png" bindtap="goVerify" />

@@ -10,7 +10,7 @@
   </view>
 </view>
 <view class="functions">
-  <view class="functions-item functions-verify">
+  <view class="functions-item functions-verify" bindtap="goToIdentity">
     <image class="icon" src="../../assets/icon/identity.png" />
     <text>身份信息认证</text>
   </view>
@@ -26,7 +26,7 @@
     <image class="icon" src="../../assets/icon/score.png" />
     <text>我的成绩</text>
   </view>
-  <view class="myscore" wx:for="{{score}}">
+  <view class="myscore" wx:for="{{score}}" wx:key="{{item.course_id}}">
     <view class="myscore-item">
       <text class="myscore-coursename">{{item.course_name}}</text>
       <text class="myscore-score">{{item.score.first}}{{item.score.second}}</text>

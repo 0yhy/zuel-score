@@ -75,25 +75,51 @@ Page({
             "authorization": `Bearer ${this.data.token}`
           },
           success: (res) => {
+            let first = Number(res.data.data.score.first);
+            let second = Number(res.data.data.score.second);
             this.setData({
               score: {
                 first: res.data.data.score.first,
                 second: res.data.data.score.second
               },
-              value: [Number(res.data.data.score.first), Number(res.data.data.score.second)]
+              value: [first ? first : 8, second ? second : 5]
             });
           }
         });
       }
     });
   },
-  // 滚动选择分数
+  // picker点击确认
   changePicker: function (e) {
     let newScore = {
       "first": e.detail.value[0],
       "second": e.detail.value[1]
     };
-    this.setData({ score: newScore });
+    if (app.globalData.isverified) {
+      this.setData({ score: newScore });
+    }
+    else {
+      wx.showModal({
+        title: "请先认证",
+        content: "前往验证教务部学号密码",
+        showCancel: true,
+        cancelText: '取消',
+        cancelColor: '#000000',
+        confirmText: '确定',
+        confirmColor: '#3CC51F',
+        success: (res) => {
+          if (res.confirm) {
+            wx.navigateTo({
+              url: "../../pages/identity/identity",
+              fail: (err) => { console.log(err) },
+              complete: () => { }
+            });
+          }
+        },
+        fail: () => { },
+        complete: () => { }
+      });
+    }
     // 发送打分请求
     wx.request({
       url: `${this.data.url}/score`,
@@ -113,9 +139,6 @@ Page({
             this.setData({ course: res.data.data });
           }
         });
-        // const pages = getCurrentPages();
-        // const prePage = pages[pages.length - 2];
-        // prePage.onLoad();
       }
     });
   },
