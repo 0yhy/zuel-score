@@ -10,15 +10,9 @@ const initialData = {
 Page({
   data: initialData,
   onLoad: function (option) {
-    console.log("teacherPage")
     wx.request({
       url: this.data.url + "/teacher",
-      header: {
-        'content-type': 'application/json',
-        "authorization": `Bearer ${this.data.token}`
-      },
-      method: 'GET',
-      dataType: 'json',
+      header: { 'content-type': 'application/json', "authorization": `Bearer ${this.data.token}` },
       success: (result) => {
         this.setData({ teacherList: result.data.data });
       }
@@ -28,13 +22,7 @@ Page({
     wx.request({
       url: this.data.url + "/teacher/course",
       data: { teacher_name: app.globalData.curTeacher },
-      header: {
-        'content-type': 'application/json',
-        "authorization": `Bearer ${this.data.token}`
-      },
-      method: 'GET',
-      dataType: 'json',
-      responseType: 'text',
+      header: { 'content-type': 'application/json', "authorization": `Bearer ${this.data.token}` },
       success: (result) => {
         this.setData({ courseList: result.data.data });
       }

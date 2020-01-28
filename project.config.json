@@ -95,6 +95,13 @@
 					"id": -1,
 					"name": "userinfo",
 					"pathName": "pages/userinfo/userinfo",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "search",
+					"pathName": "pages/search/search",
 					"scene": null
 				}
 			]

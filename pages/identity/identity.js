@@ -27,15 +27,15 @@ Page({
     setTimeout(() => {
       wx.hideLoading();
     }, 20000);
+    console.log(this.data.username, this.data.password);
     wx.request({
       url: `${this.data.url}/users/verify`,
       data: { username: this.data.username, password: this.data.password },
       header: { 'content-type': 'application/json', "authorization": `Bearer ${this.data.token}` },
       method: 'POST',
-      dataType: 'json',
-      responseType: 'text',
       success: (res) => {
         wx.hideLoading();
+        // 如果身份验证信息错误
         if (!res.data.data.isverified) {
           wx.showToast({
             title: "学号或密码错误！请重新登录",
@@ -47,19 +47,20 @@ Page({
             }
           });
         }
+        // 如果身份认证信息正确
         else {
-          this.setData({ realname: res.data.data.realname });
-          app.globalData.isverified = true;
-          console.log(app.globalData);
+          // 更改身份验证信息
+          console.log(res.data.data);
           wx.request({
             url: `${this.data.url}/users/changeverify`,
-            data: { student_id: this.data.username, realname: this.data.realname },
+            data: { student_id: this.data.username, realname: res.data.data.realname },
             header: { 'content-type': 'application/json', "authorization": `Bearer ${this.data.token}` },
             method: 'POST',
-            dataType: 'json',
-            responseType: 'text',
             success: (res) => {
               console.log(res);
+              this.setData({ realname: res.data.data.realname });
+              app.globalData.isverified = true;
+              console.log(app.globalData);
             }
           });
           wx.showToast({

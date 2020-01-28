@@ -97,6 +97,27 @@ Page({
     };
     if (app.globalData.isverified) {
       this.setData({ score: newScore });
+      // 发送打分请求
+      wx.request({
+        url: `${this.data.url}/score`,
+        data: {
+          course_id: this.data.course._id,
+          newscore_string: String(e.detail.value[0]) + String(e.detail.value[1]),
+          course_name: this.data.course.course_name
+        },
+        header: { 'content-type': 'application/json', "authorization": `Bearer ${this.data.token}` },
+        method: 'POST',
+        success: (res) => {
+          // 如果分数修改成功，重新请求课程详情，以修改页面上的平均分内容
+          wx.request({
+            url: `${this.data.url}/course/detail?teacher_name=${this.data.course.teacher_name}&course_name=${this.data.course.course_name}`,
+            header: { 'content-type': 'application/json', "authorization": `Bearer ${this.data.token}` },
+            success: (res) => {
+              this.setData({ course: res.data.data });
+            }
+          });
+        }
+      });
     }
     else {
       wx.showModal({
@@ -120,27 +141,7 @@ Page({
         complete: () => { }
       });
     }
-    // 发送打分请求
-    wx.request({
-      url: `${this.data.url}/score`,
-      data: {
-        course_id: this.data.course._id,
-        newscore_string: String(e.detail.value[0]) + String(e.detail.value[1]),
-        course_name: this.data.course.course_name
-      },
-      header: { 'content-type': 'application/json', "authorization": `Bearer ${this.data.token}` },
-      method: 'POST',
-      success: (res) => {
-        // 如果分数修改成功，重新请求课程详情，以修改页面上的平均分内容
-        wx.request({
-          url: `${this.data.url}/course/detail?teacher_name=${this.data.course.teacher_name}&course_name=${this.data.course.course_name}`,
-          header: { 'content-type': 'application/json', "authorization": `Bearer ${this.data.token}` },
-          success: (res) => {
-            this.setData({ course: res.data.data });
-          }
-        });
-      }
-    });
+
   },
 
   setLikeData: function (likeordislike, trueorfalse) {

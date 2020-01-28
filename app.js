@@ -18,10 +18,8 @@ App({
   checkLoginStatus: function () {
     if (this.globalData.token) {
       console.log("token:", this.globalData.token);
+      // 检验session_key是否过期
       wx.checkSession({
-        success: () => {
-          console.log("session_key valid");
-        },
         fail: () => {
           console.log("token expired!");
           this.login();
@@ -42,8 +40,6 @@ App({
             data: { code: res.code },
             header: { 'content-type': 'application/json' },
             method: 'POST',
-            dataType: 'json',
-            responseType: 'text',
             success: (res) => {
               wx.setStorageSync("token", res.data.data);
             }
@@ -52,12 +48,15 @@ App({
       }
     });
   },
+  // 获取该用户身份认证状况
   checkVerifyStatus: function () {
     wx.request({
       url: `${this.globalData.url}/users/isverified`,
       header: { 'content-type': 'application/json', "authorization": `Bearer ${this.globalData.token}` },
       success: (res) => {
-        this.globalData.isverified = res.data.data;
+        if (res.data.data) {
+          this.globalData.isverified = res.data.data;
+        }
       }
     });
   },

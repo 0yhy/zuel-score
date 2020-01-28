@@ -1,13 +1,11 @@
 <view class="input-bar">
-  <input type="text" bindtap="goToSearch" />
+  <input type="text" bindinput="setSearchwordData" value="{{searchword}}" />
+  <image class="input-bar-del" src="../../assets/icon/del.png" style="display:{{delDisplayed}}" bindtap="clearSearchWord" />
   <text bindtap="search">搜索</text>
 </view>
-<view class="sort-bar">
-  <text bindtap="sortCourse" class="{{currentSort == 1 ? 'current' : ''}}">课程名↑</text>
-  <text bindtap="sortAvgDesc" class="{{currentSort == 2 ? 'current' : ''}}">平均分↓</text>
-  <text bindtap="sortAvgAsc" class="{{currentSort == 3 ? 'current' : ''}}">平均分↑</text>
-  <text bindtap="sortAbove90Desc" class="{{currentSort == 4 ? 'current' : ''}}">优秀率↓</text>
-  <text bindtap="sortAbove90Asc" class="{{currentSort == 5 ? 'current' : ''}}">优秀率↑</text>
+<view class="not-found" style="display:{{notFoundDisplayed}}">
+  <text class="not-found-text">抱歉，什么都没有搜到哦</text>
+  <image src="../../assets/cry.png" />
 </view>
 <view class="course-list">
   <view class="course-list-item" wx:for="{{courseList}}" wx:key="{{item.course_id}}" bindtap="clickCourse" data-teacher="{{item.teacher_name}}" data-course="{{item.course_name}}">
