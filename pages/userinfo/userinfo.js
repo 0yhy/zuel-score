@@ -8,7 +8,16 @@ const initialData = {
 Page({
   data: initialData,
   onLoad: function () {
-    this.getUserInfo();
+    let that = this;
+    if (!this.data.token) {
+      app.login().then(() => {
+        that.setData({ token: wx.getStorageSync("token") });
+        that.getUserInfo();
+      });
+    }
+    else {
+      this.getUserInfo();
+    }
   },
   getUserInfo: function () {
     wx.request({
