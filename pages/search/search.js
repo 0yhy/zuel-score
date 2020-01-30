@@ -10,6 +10,11 @@ const initialData = {
 
 Page({
   data: initialData,
+  onShow: function () {
+    if (!this.data.token) {
+      this.setData({ token: wx.getStorageSync("token") });
+    }
+  },
   setSearchwordData: function (e) {
     this.setData({ search_word: e.detail.value });
     if (e.detail.value.length > 0) {
@@ -20,7 +25,6 @@ Page({
     }
   },
   search: function () {
-    console.log("search");
     wx.request({
       url: `${this.data.url}/search?search_word=${this.data.search_word}`,
       header: { 'content-type': 'application/json', "authorization": `Bearer ${this.data.token}` },
@@ -36,7 +40,6 @@ Page({
     });
   },
   clearSearchWord: function () {
-    console.log("douwone")
     this.setData({ searchword: "", delDisplayed: "none" });
   }
 });
