@@ -11,7 +11,16 @@ const initialData = {
 Page({
   data: initialData,
   onShow: function () {
-    this.sortCourse();
+    let that = this;
+    if (!this.data.token) {
+      app.login().then(function (res) {
+        that.setData({ token: res });
+        that.sortCourse();
+      });
+    }
+    else {
+      this.sortCourse();
+    }
   },
   clickCourse: function (e) {
     wx.navigateTo({

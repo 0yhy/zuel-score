@@ -10,6 +10,11 @@ const initialData = {
 
 Page({
   data: initialData,
+  onShow: function () {
+    if (!this.data.token) {
+      this.setData({ token: wx.getStorageSync("token") });
+    }
+  },
   setUsernameData: function (e) {
     this.setData({ username: e.detail.value });
   },
@@ -34,6 +39,7 @@ Page({
       header: { 'content-type': 'application/json', "authorization": `Bearer ${this.data.token}` },
       method: 'POST',
       success: (res) => {
+        console.log(res);
         wx.hideLoading();
         // 如果身份验证信息错误
         if (!res.data.data.isverified) {
@@ -61,18 +67,18 @@ Page({
               this.setData({ realname: res.data.data.realname });
               app.globalData.isverified = true;
               console.log(app.globalData);
-            }
-          });
-          wx.showToast({
-            title: "登陆成功！",
-            duration: 1500,
-            mask: false,
-            success: () => {
-              setTimeout(() => {
-                wx.navigateBack({
-                  delta: 1
-                });
-              }, 2000);
+              wx.showToast({
+                title: "登陆成功！",
+                duration: 1500,
+                mask: false,
+                success: () => {
+                  setTimeout(() => {
+                    wx.navigateBack({
+                      delta: 1
+                    });
+                  }, 2000);
+                }
+              });
             }
           });
         }

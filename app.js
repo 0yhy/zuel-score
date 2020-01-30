@@ -1,6 +1,6 @@
 App({
   globalData: {
-    url: "http://127.0.0.1:1027",
+    url: "https://zuel.harryshaun.wang",
     token: wx.getStorageSync("token"),
     isverified: false,
     curTeacher: "刘萍"
@@ -32,20 +32,23 @@ App({
     }
   },
   login: function () {
-    wx.login({
-      success: (res) => {
-        if (res.code) {
-          wx.request({
-            url: this.globalData.url + "/users/checkuser",
-            data: { code: res.code },
-            header: { 'content-type': 'application/json' },
-            method: 'POST',
-            success: (res) => {
-              wx.setStorageSync("token", res.data.data);
-            }
-          });
+    return new Promise(function (resolve, reject) {
+      wx.login({
+        success: (res) => {
+          if (res.code) {
+            wx.request({
+              url: "https://zuel.harryshaun.wang/users/checkuser",
+              data: { code: res.code },
+              header: { 'content-type': 'application/json' },
+              method: 'POST',
+              success: (res) => {
+                wx.setStorageSync("token", res.data.data);
+                resolve(res.data.data);
+              }
+            });
+          }
         }
-      }
+      });
     });
   },
   // 获取该用户身份认证状况

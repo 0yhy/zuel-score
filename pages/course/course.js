@@ -33,10 +33,7 @@ Page({
     // 获取课程信息
     wx.request({
       url: `${this.data.url}/course/detail?teacher_name=${option.teacher}&course_name=${option.course}`,
-      header: {
-        'content-type': 'application/json',
-        "authorization": `Bearer ${this.data.token}`
-      },
+      header: { 'content-type': 'application/json', "authorization": `Bearer ${this.data.token}` },
       success: (result) => {
         this.setData({ course: result.data.data });
 

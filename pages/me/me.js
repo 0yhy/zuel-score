@@ -10,11 +10,21 @@ Page({
   data: initialData,
   // goLogin: app.login,
   onShow: function () {
-    this.getMyScore();
-    this.checkVerifyStatus();
+    let that = this;
+    if (!this.data.token) {
+      app.login().then(function (res) {
+        that.setData({ token: res });
+        that.getMyScore();
+        that.checkVerifyStatus();
+      })
+    }
+    else {
+      this.getMyScore();
+      this.checkVerifyStatus();
+    }
   },
   checkVerifyStatus: function () {
-    this.setData({ isverified: app.globalData.isverified });
+    this.setData({ isverified: wx.getStorageSync("token") });
   },
   getMyScore: function () {
     wx.request({

@@ -9,7 +9,32 @@ const initialData = {
 
 Page({
   data: initialData,
-  onLoad: function (option) {
+  onLoad: function () {
+    let that = this;
+    if (!this.data.token) {
+      app.login().then(function (res) {
+        that.setData({ token: res });
+        that.getTeacherList();
+      })
+    }
+    else {
+      this.getTeacherList();
+    }
+  },
+  onShow: function () {
+    console.log("token:::", this.data.token);
+    let that = this;
+    if (!this.data.token) {
+      app.login().then(function (res) {
+        that.setData({ token: res });
+        that.getCurTeacherCourseList();
+      })
+    }
+    else {
+      this.getCurTeacherCourseList();
+    }
+  },
+  getTeacherList: function () {
     wx.request({
       url: this.data.url + "/teacher",
       header: { 'content-type': 'application/json', "authorization": `Bearer ${this.data.token}` },
@@ -18,7 +43,7 @@ Page({
       }
     });
   },
-  onShow: function () {
+  getCurTeacherCourseList: function () {
     wx.request({
       url: this.data.url + "/teacher/course",
       data: { teacher_name: app.globalData.curTeacher },
